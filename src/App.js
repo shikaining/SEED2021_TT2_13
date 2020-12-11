@@ -16,6 +16,7 @@ function App() {
         <div className="auth-inner">
           <Switch>
             <Route path="/mainpage" component={MainPage} />
+            <Route path='/login/' component={Login} />
           </Switch>
         </div>
       </div>
