@@ -12,16 +12,6 @@ function Transfer() {
     const [amount, setAmount] = useState(0);
     const [custId, setCustId] = useState(null);
     const [receiverId, setReceiverId] = useState(null);
-    const [myBalance, setMyBalance] = useState(null);
-    const [receiverBalance, setReceiverBalance] = useState(null);
-
-
-    //get my own balance-api 1
-    //get their balance-api 2
-    //subtract from mine
-    //update my account-api 3
-    //increase to theirs
-    //update their account-api 4
 
 
     function submitHandler(e) {
@@ -29,12 +19,6 @@ function Transfer() {
         console.log({ custId });
         console.log({ receiverId });
         console.log({ amount });
-        console.log({ receiverId });
-
-        //deduct from logged in user
-        let fdata = new FormData();
-        fdata.append("custID", custId);
-        fdata.append("Amount", myBalance);
 
         fetch(url, {
             method: "POST",
@@ -42,7 +26,12 @@ function Transfer() {
                 "Content-Type": "application/json",
                 "x-api-key": authToken
             },
-            body: fdata,
+            body: JSON.stringify({
+                custID: custId,
+                receiverId: receiverId,
+                amount: amount
+
+            })
 
         })
             .then((res) => {
@@ -54,32 +43,6 @@ function Transfer() {
             .catch((err) => {
                 console.log(err);
             });
-
-
-        //to receiver
-        let fdata1 = new FormData();
-        fdata.append("custID", receiverId);
-        fdata.append("Amount", receiverBalance);
-
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": authToken
-            },
-            body: fdata1,
-
-        })
-            .then((res) => {
-                console.log(res);
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
 
     };
 
