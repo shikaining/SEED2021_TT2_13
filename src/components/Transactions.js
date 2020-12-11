@@ -41,7 +41,7 @@ class TransactionPage extends Component {
         }).catch((e)=>{
             console.log(e)
         })
-        let nameCollection = _.find(userDatabase,(id)=>{return id === custID})
+        let nameCollection = _.find(userDatabase,(x)=>{return x.custID === id})
         let transacName = nameCollection.firstName
         return transacName
     }
@@ -52,15 +52,15 @@ class TransactionPage extends Component {
         for (let transaction in datajson){
 
             let new_transaction = {}
-            new_transaction.date = transation.date
+            new_transaction.date = transaction.date
             new_transaction.category = transaction.expensesCat
             new_transaction.eGift = transaction.eGift
             // If custid == ownID, it will be a negative transaction
-            // If payeeid == ownID, it will be a postive transation
-            if (transation.custID === ownID) {
+            // If payeeid == ownID, it will be a postive transaction
+            if (transaction.custID === ownID) {
                 new_transaction.amount = '-'.concat(String(transaction.amount))
                 new_transaction.name = 'Paid To '.concat(this.nameSearcher(transaction.payeeID))
-            } else if (transation.payeeID === ownID) {
+            } else if (transaction.payeeID === ownID) {
                 new_transaction.amount = '+'.concat(String(transaction.amount))
                 new_transaction.name = 'Received From '.concat(this.nameSearcher(transaction.custID))
             }
