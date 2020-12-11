@@ -41,4 +41,4 @@ class TransactionCard extends Component {
     }
 }
 
-export default withStyles(Styles)(TransactionCard)
+export default TransactionCard
