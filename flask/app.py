@@ -1,3 +1,4 @@
+
 from flask import Flask, jsonify,json
 import requests
 from flask_cors import CORS
@@ -55,7 +56,49 @@ def updateAccount(acc_id,amount):
         headers=header,
     )
     return response.text
+@app.route('/debug')
+def index():
+    html_content = """
+    <form action="/login" method="POST">
+        <input type="text" name="username" placeholder="username"/>
+        <input type="password" name="password" placeholder="password"/>
+        <button type="submit">SUBMIT</button>
+    </form>
+    """
+    return html_content
 
+@app.route('/login', methods = ["POST"])
+def login():
+    login_url = "https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/login"
+    response = requests.post(login_url, json = dict(request.form), headers = headers)
+    print(dict(request.form))
+
+    if response.status_code != 200:
+        print(response.status_code)
+        print(type(response.status_code))
+        return {"status_code" : response.status_code}
+    else:
+        modified_response = {}
+        modified_response["data"] = response.json()
+        modified_response["status_code"] = response.status_code
+        return modified_response
+
+@app.route('/transaction/add', methods = ["POST", "GET"])
+def addTransaction():
+    add_transaction_url = "https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/transaction/add" ## Add Transaction
+    
+    #tosend_api = request.json.copy()
+    print(request.json)
+    response = requests.post(add_transaction_url, json = request.json, headers = headers)
+
+    if response.status_code != 200:
+        return {"status_code" : response.status_code}
+    else:
+        modified_response = {}
+        modified_response["data"] = response.json()
+    
+        return modified_response
+    return "s"
 
 if __name__ == '__main__':
     app.run(debug=True)
