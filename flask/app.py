@@ -19,13 +19,10 @@ def getTransaction(acc_id):
         headers={'x-api-key': 'zBrlPqfHv28k7P4gr47sk3TM3xF3uE8WdHHHl6kh', 'Content-Type': 'application/json'},
     )
     json_response = jsonify(response.json())
-    # data = json.loads(json_response)
-    # print(data)
-    # loaded_json = json.dumps(json_response)
-    # print(loaded_json)
-    # for x in loaded_json:
-    #     print(x)
-    return json_response
+    json_obj = response.json()
+    for item in json_obj:
+        item['dateTime']=item['dateTime'][:10]
+    return jsonify(json_obj)
 
 
 @app.route('/getAccount/<int:acc_id>',methods=['GET'])
@@ -56,7 +53,7 @@ def getAll():
 def updateAccount(acc_id,amount):
     response = requests.post(
         'https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/accounts/update',
-        json={'custID':1, 'amount':1},
+        json={'custID':acc_id, 'amount':amount},
         headers={'x-api-key': 'zBrlPqfHv28k7P4gr47sk3TM3xF3uE8WdHHHl6kh', 'Content-Type': 'application/text'},
     )
     print(response.status_code)
