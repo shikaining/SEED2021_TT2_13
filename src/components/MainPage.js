@@ -7,7 +7,7 @@ function MainPage() {
 
     const authToken = "zBrlPqfHv28k7P4gr47sk3TM3xF3uE8WdHHHl6kh";
     //mock data to see display
-    const [custId, setCustId] = useState("");
+    const [custId, setCustId] = useState(3);
     const [accountName, setAccountName] = useState("");
     const [accountNumber, setAccountNumber] = useState(null);
     const [balance, setBalance] = useState(null);
@@ -15,7 +15,7 @@ function MainPage() {
 
     const url = "https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/accounts/view"
 
-    const backendUrl = "";
+    let backendUrl = "http://localhost:5000/getAccount";
 
     const retrieveAccountDetails = async () => {
 
@@ -49,6 +49,27 @@ function MainPage() {
         // });
 
         //calling our backend 
+        backendUrl +=( "/" + custId);
+        console.log(backendUrl);
+        await fetch(backendUrl
+        )
+            .then((res) => {
+                return res.text();
+            })
+            .then((data) => {
+                console.log(data);
+                console.log(JSON.parse(data));
+
+                let parsedData = JSON.parse(data);
+                setAccountName(parsedData[0].accountName);
+                setAccountNumber(parsedData[0].accountNumber);
+                setBalance(parsedData[0].availableBal);
+                setLinked(parsedData[0].linked);
+
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     useEffect(() => {

@@ -9,7 +9,7 @@ function Transfer() {
     //url to get the response
     const url = "https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/accounts/update";
 
-    const backendUrl = "/getAccount/";
+    const backendUrl = "/updateAccount";
 
     const [amount, setAmount] = useState(0);
     const [custId, setCustId] = useState(null);
@@ -48,6 +48,19 @@ function Transfer() {
         //     });
 
         //calling backend
+        fetch(backendUrl + "/" + receiverId  + "/" + amount
+        )
+            .then((res) => {
+                return res.text();
+            })
+            .then((data) => {
+                console.log(data);
+             
+
+            })
+            .catch((err) => {
+                console.log(err);
+            });
 
     };
 
