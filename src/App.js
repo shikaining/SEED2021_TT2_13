@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import MainPage from "./components/MainPage";
 import Transfer from "./components/Transfer";
+import Login from "./components/LogIn";
+import Transactions from "./components/Transactions";
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
           <Switch>
             <Route path="/mainpage" component={MainPage} />
             <Route path="/transfer" component={Transfer} />
+            <Route path="/login" component={Login} />
+            <Route path="/transactions" component={Transactions} />
           </Switch>
         </div>
       </div>

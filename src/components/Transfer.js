@@ -9,40 +9,45 @@ function Transfer() {
     //url to get the response
     const url = "https://u8fpqfk2d4.execute-api.ap-southeast-1.amazonaws.com/techtrek2020/accounts/update";
 
+    const backendUrl = "/getAccount/";
+
     const [amount, setAmount] = useState(0);
     const [custId, setCustId] = useState(null);
     const [receiverId, setReceiverId] = useState(null);
 
 
+    //to call backend route
     function submitHandler(e) {
         e.preventDefault();
         console.log({ custId });
         console.log({ receiverId });
         console.log({ amount });
 
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": authToken
-            },
-            body: JSON.stringify({
-                custID: custId,
-                receiverId: receiverId,
-                amount: amount
+        //calling api straight
+        // fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "x-api-key": authToken
+        //     },
+        //     body: JSON.stringify({
+        //         custID: custId,
+        //         receiverId: receiverId,
+        //         amount: amount
+        //     })
 
-            })
+        // })
+        //     .then((res) => {
+        //         console.log(res);
+        //     })
+        //     .then((data) => {
+        //         console.log(data);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
 
-        })
-            .then((res) => {
-                console.log(res);
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        //calling backend
 
     };
 
@@ -51,7 +56,7 @@ function Transfer() {
             <NavBar />
             <div className="transferForm">
                 <form>
-                    <h3>Transfer to another account</h3>
+                    <h3>Transfer</h3>
                     <div className="form-group">
                         <label>Customer ID of receiver</label>
                         <input type="text" className="form-control" value={receiverId} onChange={(e) => {
@@ -65,7 +70,7 @@ function Transfer() {
                         }} />
                     </div>
 
-                    <button type="submit" onClick={submitHandler} className="btn btn-primary btn-block">Confirm Transfer</button>
+                    <button type="submit" onClick={submitHandler} className="btn btn-primary btn-block">Transfer Now</button>
 
                 </form>
             </div>

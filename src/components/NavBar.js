@@ -16,17 +16,20 @@ function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-
-                            
-                                {/* <Link className="nav-link" to={"/logout"}>
-                                    Logout
-                            </Link> 
-                                <Link className="nav-link" to={"/login"}>
-                                    Login
-                            </Link> */}
+                        </li>
+                        
+                        <li className="nav-item">
+                            <Link className="nav-link" to={"/transactions"}>
+                                Transactions
+                        </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={"/mainpage"}>
+                            <Link className="nav-link" to={"/transfer"}>
+                                Transfer
+                        </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={"/login"}>
                                 Logout
                         </Link>
                         </li>
