@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
 import MainPage from "./components/MainPage";
+import Transfer from "./components/Transfer";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <div className="auth-inner">
           <Switch>
             <Route path="/mainpage" component={MainPage} />
+            <Route path="/transfer" component={Transfer} />
           </Switch>
         </div>
       </div>
